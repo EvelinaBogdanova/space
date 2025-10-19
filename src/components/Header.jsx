@@ -1,7 +1,7 @@
-import react, { useState } from "react";
+import React, { useState } from "react";
 import "./Header.css"
 
-export default function Headers({
+export default function Header({
     brand = {text: "space", href: "/"},
     links = [
         { label: "Головна", href: "#" },
@@ -29,7 +29,15 @@ export default function Headers({
     
           <nav className={`hdr__nav ${open ? "is-open" : ""}`}>
             {links.map((l) => (
-              <a key={l.label} className="hdr__link" href={l.href}>
+              <a 
+                key={l.label} 
+                className="hdr__link" 
+                href={l.href}
+                onClick={(e) => {
+                  e.preventDefault();
+                  if (l.onClick) l.onClick();
+                }}
+              >
                 {l.label}
               </a>
             ))}
